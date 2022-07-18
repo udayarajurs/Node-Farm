@@ -1,4 +1,8 @@
 const fs = require("fs");
+const http = require("http");
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FILES
 
 // Blocking, synchronous way
 // const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
@@ -12,17 +16,29 @@ const fs = require("fs");
 //   console.log(data);
 // });
 
-fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
-  if (err) return console.error("ERROR! 😢😢");
-  fs.readFile(`./txt/${data1}.txt`, "utf-8", (err, data2) => {
-    console.log(data2);
-    fs.readFile(`./txt/append.txt`, "utf-8", (err, data3) => {
-      console.log(data3);
-      fs.writeFile(`./txt/final.txt`, `${data2}\n${data3}`, "utf-8", (err) => {
-        console.log("File written successfully😉😉");
-      });
-    });
-  });
+// fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
+//   if (err) return console.error("ERROR! 😢😢");
+//   fs.readFile(`./txt/${data1}.txt`, "utf-8", (err, data2) => {
+//     console.log(data2);
+//     fs.readFile(`./txt/append.txt`, "utf-8", (err, data3) => {
+//       console.log(data3);
+//       fs.writeFile(`./txt/final.txt`, `${data2}\n${data3}`, "utf-8", (err) => {
+//         console.log("File written successfully😉😉");
+//       });
+//     });
+//   });
+// });
+
+// console.log("will read file!");
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SERVER
+
+const server = http.createServer((req, res) => {
+  // console.log(req);
+  res.end("Hello from the server!");
 });
 
-console.log("will read file!");
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listening on port 8000");
+});
