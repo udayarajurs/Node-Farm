@@ -35,10 +35,19 @@ const http = require("http");
 // SERVER
 
 const server = http.createServer((req, res) => {
-  // console.log(req);
-  res.end("Hello from the server!");
+    const pathName = req.url;
+    if (pathName === "/" || pathName === "/home") {
+        res.end("Hello World!");
+    } else if (pathName === "/about") {
+        res.end("About Page");
+    } else {
+        res.writeHead(404, { "Content-Type": "text/html" , "my-own-header": "hello-world"});
+        res.end("<h1>404</h1>");
+    }
+
 });
 
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listening on port 8000");
 });
+ 
