@@ -39,13 +39,21 @@ const dataOnj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
   const pathName = req.url;
+
+  // Overview page
   if (pathName === "/" || pathName === "/home") {
     res.end("Hello World!");
-  } else if (pathName === "/about") {
-    res.end("About Page");
+
+    // Products page
+  } else if (pathName === "/product") {
+    res.end("product Page");
+
+    // API
   } else if (pathName === "/api") {
     res.writeHead(200, { "Content-type": "application/json" });
     res.end(data);
+
+    // Not found
   } else {
     res.writeHead(404, {
       "Content-Type": "text/html",
